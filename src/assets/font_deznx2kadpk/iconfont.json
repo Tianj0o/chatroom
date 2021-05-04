@@ -1,0 +1,65 @@
+{
+  "id": "2524078",
+  "name": "2",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "435905",
+      "name": "发送",
+      "font_class": "fasong",
+      "unicode": "e7a1",
+      "unicode_decimal": 59297
+    },
+    {
+      "icon_id": "1203690",
+      "name": "头像",
+      "font_class": "xiugaitouxiang",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "6282751",
+      "name": "历史记录",
+      "font_class": "lishijilu",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "6496026",
+      "name": "Vue",
+      "font_class": "Vue",
+      "unicode": "e799",
+      "unicode_decimal": 59289
+    },
+    {
+      "icon_id": "6548538",
+      "name": "进入",
+      "font_class": "jinru",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "8642064",
+      "name": "SEND",
+      "font_class": "SEND",
+      "unicode": "e7e9",
+      "unicode_decimal": 59369
+    },
+    {
+      "icon_id": "10466728",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "18724139",
+      "name": "头像",
+      "font_class": "touxiang",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    }
+  ]
+}
