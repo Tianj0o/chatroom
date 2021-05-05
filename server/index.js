@@ -17,7 +17,7 @@ require('./mongoose/db')(app)
 
 require('./routes/index')(app)
 
-// require('./routes/music')(app)
+require('./routes/music')(app)
 
 app.use('/chatroom',express.static(__dirname+'/chatroom'))
 const Ws = require('ws')
