@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13646794",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "17537719",
+      "name": "暂停",
+      "font_class": "zanting1",
+      "unicode": "ecff",
+      "unicode_decimal": 60671
+    },
+    {
+      "icon_id": "9606432",
+      "name": "音乐演奏",
+      "font_class": "yinleyanzou",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "435905",
       "name": "发送",
       "font_class": "fasong",

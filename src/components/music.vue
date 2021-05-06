@@ -11,7 +11,7 @@
             <div style="display:flex;flex-direction:column;flex-grow:1">
                 <span style="overflow: hidden;
 text-overflow:ellipsis;
-white-space: nowrap">{{item.name}}</span>
+white-space: nowrap ">{{item.name}}</span>
                 <span>{{item.author}}</span>
                 </div>
             <audio  style="width:6rem;height:3rem;" controls :src="item.url"></audio>
