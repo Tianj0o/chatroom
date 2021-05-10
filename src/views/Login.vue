@@ -51,9 +51,9 @@ export default {
     const username = ref("");
     const router = useRouter();
 
-    //定义前端接口
+    
     let {ctx,proxy} = getCurrentInstance()
-
+    //获得组件实例 其中ctx只能在生产环境使用 proxy在生产和线上都可使用
 
 
     const handleEnterBtnClick = async () => {
@@ -63,7 +63,10 @@ export default {
         return;
       }
       localStorage.setItem("username", Username);
+      //将username储存在本地
+      
       const res = await proxy.$http.post('/user',{username:Username})
+      //将username发给后端 注意 使用对象，后端上已经使用 json方法
       router.push("/");
     };
     onMounted(() => {
@@ -74,6 +77,9 @@ export default {
       }
 
     });
+
+
+    //获取屏幕的高度来适应不同的屏幕
     const screenHeight = ref(0);
     const setHeight = () => {
       const nowheight = window.innerHeight;

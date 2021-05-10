@@ -112,6 +112,7 @@ export default {
     const username = localStorage.getItem("username");
 
     const ws = useWebSocket(handleMessage);
+    //将信息接受的事件传递给接受信息的组件
 
     const handlerSentBtnClcik = async () => {
       const data = {
@@ -170,19 +171,18 @@ export default {
     const hismsgs = ref([]);
 
     const flag = ref(true);
-    //控制点击事件发送的次数
+    //控制点击事件发送的次数 点击一次后就不能点击了
+
+    //获取信息
     const fetchMsg = async () => {
       if (flag.value) {
+
         state.msglist = [];
+        //先将信息列表清空 防止历史信息与发送的信息重合
         const res = await proxy.$http.get("/msg");
-        // console.log(res.data)
-        // console.log((res.data))
         const length1 = res.data.length;
         const findata = res.data.slice(length1 - 15, length1);
         hismsgs.value = findata;
-        // console.log(findata);
-        // console.log(hismsgs.value)
-
         const hisdiv = document.querySelector("#historyMsgs");
         hisdiv.style.backgroundColor = "rgb(104, 176, 173)";
         tips.value = "";

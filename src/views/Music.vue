@@ -79,6 +79,9 @@ export default {
     let { proxy } = getCurrentInstance();
     //post将歌曲名发给后端
     const musicname = ref({});
+
+
+    //给后端发送歌曲名
     const postMusicName = async () => {
       const data = await proxy.$http.post("/musicname", musicname.value);
       console.log(data.data);
@@ -91,6 +94,8 @@ export default {
       musiclist: [],
       navname:'每日推荐',
     });
+
+    //向后端请求数据
     const fetchmusic = async () => {
       const data = await proxy.$http.get("/musiclist");
       console.log(data.data);
