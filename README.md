@@ -5,12 +5,12 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动前端
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包(默认打包到server文件夹下chatroom)
 ```
 npm run build
 ```
@@ -18,9 +18,17 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### 启动后台
+```
+npm run dev
+```
 
+
+###
+聊天室 websocket
+###
 # 前端
-    WebSocket -> 构造函数 -> new -> websocket
+    WebSocket
     open
     close
     error
@@ -28,7 +36,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # 后端
     ws
-    Ws -> Server -> new ->配置端口
 
     open
     close

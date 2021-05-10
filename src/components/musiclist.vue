@@ -1,5 +1,5 @@
 <template>
-  <div id="musiclist" style="margin-top: 1rem">
+  <div id="musiclist" style="margin-top: 1rem;height:80%;">
     <ul>
       <li
         v-for="(item, i) in musiclists"
@@ -27,21 +27,29 @@
             margin: 1rem;
           "
         >
-          <audio loop="true" :id="`music${i}`" :src="item.url"></audio>
+          <audio  loop="true" :id="`music${i}`" :src="item.url"></audio>
           <span
             :id="`icon${i}`"
             class="iconfont icon-zanting iconxxx"
             style="font-size: 2rem"
-            @click="playmusic(i)"
+            @click="playmusic(i,item)"
           ></span>
         </div>
       </li>
     </ul>
+    <div style="display:flex;justify-content:center;align-items;center;margin-top:22%;">
+      <div style="background-color:rgba(244,67,54,0.89);height:2.5rem;width:96%;display:flex;align-items:center;">
+        
+        <div v-if="state.section" id="currentime" :style="'width:'+state.section"></div>
+      
+        <span class="iconfont icon-fasong" style="font-size:1.5rem;margin-left:0.5rem"></span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { toRefs, onMounted, ref, watch } from "vue";
+import { toRefs, onMounted, ref, watch, reactive } from "vue";
 export default {
   name: "musiclist",
   props: {
@@ -50,13 +58,23 @@ export default {
   setup(props, ctx) {
     const { musiclists } = toRefs(props);
     // console.log(musiclists.value);
-
-    const playmusic = (i) => {
+    const state = reactive({
+      musictime:String,
+      currenttime:String,
+      section:String,
+      
+    })
+    const playmusic = (i,item) => {
       const allmusic = document.querySelectorAll("audio");
       const allicon = document.querySelectorAll(".iconxxx");
       const currentmusic = document.querySelector(`#music${i}`);
       const currenticon = document.querySelector(`#icon${i}`);
+      state.musictime =parseInt(currentmusic.duration/60)+':'+parseInt(currentmusic.duration%60);
 
+      currentmusic.addEventListener('timeupdate',()=>{
+        state.currenttime = currentmusic.currentTime;
+        state.section = (currentmusic.currentTime/currentmusic.duration*100)*0.87+"%"
+      })
       for (let n = 0; n < allmusic.length; n++) {
         if (n !== i) {
           allmusic[n].pause();
@@ -88,6 +106,7 @@ export default {
     return {
       musiclists,
       playmusic,
+      state,
     };
   },
 };
@@ -101,5 +120,9 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+#currentime {
+  background-color:#03f4b8;
+  height: 1.9rem;
 }
 </style>

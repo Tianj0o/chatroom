@@ -4,28 +4,40 @@
     :style="'height:' + screenHeight + 'px;' + 'width:' + screenWidth + 'px;'"
   >
     <div class="home" style="display: flex; flex-direction: column">
-      <div
-        id="historyMsgs"
-        class="historyMsgs"
-        @click="fetchMsg"
-        style="
-          display: flex;
-          justify-content: center;
-          margin: 0.5rem 0;
-          height: 2rem;
-          align-items: center;
-        "
-      >
-        <span style="">{{ tips }}</span>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          style="font-size: 1.3rem; margin-left: 0.4rem"
+      <div style="display: flex; align-items: center">
+        <div
+          id="historyMsgs"
+          class="historyMsgs"
+          @click="fetchMsg"
+          style="
+            display: flex;
+            justify-content: center;
+            margin: 0.5rem 0;
+            height: 2rem;
+            align-items: center;
+            width: 50%;
+          "
         >
-          <use xlink:href="#icon-lishijilu"></use>
-        </svg>
+          <span style="">{{ tips }}</span>
+          <svg
+            class="icon"
+            aria-hidden="true"
+            style="font-size: 1.3rem; margin-left: 0.4rem"
+          >
+            <use xlink:href="#icon-lishijilu"></use>
+          </svg>
+        </div>
+        <div style="width: 50%; display: flex; justify-content: center">
+         
+          <router-link  to="/music" tag="div"
+            ><span>听音乐</span> </router-link
+          >
+       
+          <svg class="icon" style="font-size: 1.3rem; margin-left: 0.4rem;" aria-hidden="true">
+            <use xlink:href="#icon-yinleyanzou"></use>
+          </svg>
+        </div>
       </div>
-
       <div
         ref="myref"
         id="chatlist"
@@ -44,8 +56,13 @@
 
               <i style="font-size: 0.7rem">{{ item.time }}</i>
             </div>
-            <div style="max-width: 70%;">
-              <div class="context" style="word-wrap: break-word; word-break: normal;">{{ item.msg }}</div>
+            <div style="max-width: 70%;display:flex">
+              <div
+                class="context"
+                style="word-wrap: break-word; word-break: break-all"
+              >
+                {{ item.msg }}
+              </div>
             </div>
           </li>
         </ul>
@@ -64,7 +81,7 @@
           "
         />
         <button @click="handlerSentBtnClcik">
-          <svg class="icon" aria-hidden="true">
+          <svg class="icon" aria-hidden="true" style="width:1.5rem">
             <use xlink:href="#icon-SEND"></use>
           </svg>
         </button>
@@ -108,36 +125,8 @@ export default {
       const res = await proxy.$http.post("/msg", data);
       //单独显示自己发出去的信息
       //太low了 还有bug 动态设置css啊！！！ tule
-      /* const msglist = document.querySelector("#msglists");
-      const myli = document.createElement("li");
-      myli.innerHTML = `
-          <li style="display:flex;flex-direction:column;align-items:flex-end;margin-right:2rem;margin-bottom:0.5rem">
-            <div style="margin: 0.5rem 0">
-              <span>${data.name}</span>
-
-              <i style="font-size: 0.7rem">${data.time}</i>
-            </div>
-            <div>
-              <span class="context">${data.msg}</span>
-            </div>
-          </li>
-      `;
-      msglist.appendChild(myli); */
       ws.send(JSON.stringify(data));
       state.msg = "";
-      // console.log(myref.value.offsetHeight)
-      // console.log(
-      //   myref.value.scrollTop,
-      //   myref.value.scrollHeight,
-      //   myref.value.offsetHeight
-      // );
-      /* setTimeout(
-        () =>
-          (myref.value.scrollTop =
-            myref.value.scrollHeight - myref.value.offsetHeight),
-        10
-      ); */
-      // console.log(myref.value.scrollTop,myref.value.scrollHeight)
     };
 
     function handleMessage(e) {
@@ -160,13 +149,6 @@ export default {
       if (!username) {
         router.push("/login");
       }
-      // console.log(myref.value.scrollHeight)
-      //查找滚动条的位置
-      // const nowscrollHeight = myref.value.screenHeight
-      // const nowscrollTop = myref.value.screenTop
-
-      // console.log(myref.value.scrollTop)
-      // setInterval(()=>myref.value.scrollTop=myref.value.scrollHeight,1000)
     });
 
     //监控屏幕高度
@@ -259,6 +241,11 @@ ul {
   align-items: flex-end;
   margin-right: 2rem;
 }
+.other {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+}
 li {
   list-style: none;
 }
@@ -275,5 +262,8 @@ li {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+a {
+  text-decoration: none;
 }
 </style>

@@ -53,17 +53,17 @@
         </div>
       </div>
     </form>
-    <div>
+    <div style="height:90%">
       <div style="display:flex;justify-content:space-between;width:90%;height:4rem;align-items:center;border-bottom:1px solid grey;margin:0 auto;">
-      <p style="font-size:1.2rem;margin-left:2rem">{{state.navname}}</p> 
-      <svg class="icon" aria-hidden="true" style="font-size: 2rem;margin-right:2rem;">
-        <use
-          xlink:href="#icon-yinleyanzou"
-        ></use>
-      </svg>
+      <p  style="font-size:1.2rem;margin-left:2rem">{{state.navname}}</p> 
+      <router-link style="margin-right:2rem" tag="div" to="/"> <strong>back</strong> </router-link>
       </div>
+      
       <musiclist :musiclists="state.musiclist"></musiclist>
+      
+      
     </div>
+
   </div>
 </template>
 
@@ -138,5 +138,8 @@ input,
 button {
   margin: 0;
   padding: 0;
+}
+a {
+  text-decoration: none;
 }
 </style>

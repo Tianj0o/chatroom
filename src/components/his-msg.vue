@@ -6,8 +6,8 @@
 
               <i style="font-size: 0.7rem">{{ item.time }}</i>
             </div>
-            <div style="max-width:70%;">
-              <div class="context" style="word-wrap: break-word; word-break: normal;">{{ item.msg }}</div>
+            <div style="max-width:70%;display:flex">
+              <div class="context" style="word-wrap: break-word; word-break: break-all;">{{ item.msg }}</div>
             </div>
           </li>
         </ul>
