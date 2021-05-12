@@ -9,6 +9,7 @@ module.exports = (app) =>{
 
     const router = express.Router()
 
+    const music = require('../model/music')
     //创建一个工厂模式函数
     function creatmusic(name,author,url,img){
         let o = new Object();
@@ -22,26 +23,31 @@ module.exports = (app) =>{
     //获取音乐列表的函数
     async function fetchmusic(musicname){
     
-        const browser = await puppeteer.launch({headless:false})
+        const browser = await puppeteer.launch({headless:true})
         const page = await browser.newPage()
-        await page.goto('https://m.music.migu.cn/v3')
+        await page.goto(`https://m.music.migu.cn/v3/search?keyword=${musicname}`)
 
-        await page.waitForSelector('#search-input')
+        // await page.waitForSelector('#search-input')
 
-        await (await page.$('#search-input')).click()
+        // await (await page.$('#search-input')).click()
 
-        await page.waitForSelector('#researchBox')
-        const searchinput = await page.$('#researchBox')
-        await searchinput.type(musicname,{delay:100})
+        // await page.waitForSelector('#researchBox')
+        // const searchinput = await page.$('#researchBox')
+        // await searchinput.type(musicname,{delay:100})
 
-        await (await page.$('#researchBtn')).click()
+        // await (await page.$('#researchBtn')).click()
 
         await page.waitForSelector('#index_section')
 
         
-        //获得前三条
+        //获得前6条
+        // const alllength1 = await page.$$eval('#index_section > div.song.nav_list.song_list > div',item=>item.length)
+        // var count = 7;
+        // if(alllength1<7){
+        //     count = alllength1
+        // }
         
-        for(let i = 0;i<6;i++){
+        for(let i = 0;i<7;i++){
             await page.waitForSelector(`#index_section > div.song.nav_list.song_list > div:nth-child(${i+1}) > div.music_name.clearfix > div.audio_div > span`)
             const url = await page.$eval(`#index_section > div.song.nav_list.song_list > div:nth-child(${i+1}) > div.music_name.clearfix > div.audio_div > span`,item=>item.getAttribute('src'))
             
@@ -52,7 +58,7 @@ module.exports = (app) =>{
             musicLists[i]= creatmusic(name,author,url,img)
         }
         // const musicSec = await page.$('body > div.seainput_div > div > input')
-        console.log(musicLists)
+        // console.log(musicLists)
         // await  musicSec.type(musicname,{delay:100})
 
 
@@ -82,11 +88,6 @@ module.exports = (app) =>{
             url: 'https://freetyst.nf.migu.cn/public%2Fproduct8th%2Fproduct39%2F2020%2F04%2F2415%2F2009%E5%B9%B406%E6%9C%8826%E6%97%A5%E5%8D%9A%E5%B0%94%E6%99%AE%E6%96%AF%2F%E5%85%A8%E6%9B%B2%E8%AF%95%E5%90%AC%2FMp3_64_22_16%2F60054701958153829.mp3',
             img: 'https://mcontent.migu.cn/newlv2/new/album/20191125/8591/s_KV3amA6En4HiVOkO.jpg'
           },{
-            name: '乌鸦',
-            author: '许嵩',
-            url: 'https://freetyst.nf.migu.cn/public%2Fproduct10th%2FproductB35%2F2021%2F05%2F0617%2F2021%E5%B9%B405%E6%9C%8806%E6%97%A517%E7%82%B910%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%B5%B7%E8%9D%B6%E5%94%B1%E7%89%871%E9%A6%96%2F%E5%85%A8%E6%9B%B2%E8%AF%95%E5%90%AC%2FMp3_64_22_16%2F6005860TDR9172004.mp3',
-            img: 'https://mcontent.migu.cn/newlv2/new/album/20210507/1138367281/s_yh8fWsMXLolHCjFo.jpg'
-          },{
             name: '戒烟',
             author: '李荣浩',
             url: 'https://freetyst.nf.migu.cn/public%2Fproduct9th%2Fproduct41%2F2020%2F08%2F1119%2F2018%E5%B9%B411%E6%9C%8801%E6%97%A512%E7%82%B935%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E5%8D%8E%E7%BA%B35%E9%A6%96-6%2F%E5%85%A8%E6%9B%B2%E8%AF%95%E5%90%AC%2FMp3_64_22_16%2F6005751J1EB191529.mp3',
@@ -104,6 +105,13 @@ module.exports = (app) =>{
           }]
 
           res.send(music)
+    })
+    router.post('/musiclists',async(req,res)=>{
+        const query = await  music.find({'url':req.body.url})
+        if(query.length==0){
+        const model = await music.create(req.body)
+        }
+        res.send('成功')
     })
     app.use('/chatroom/api',router)
 }
