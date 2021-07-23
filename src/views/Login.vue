@@ -37,6 +37,10 @@
       >
         Enter
       </button>
+      <!-- <div style="height:3rem;width:5rem;display:flex;align-items:center">
+        <input type="text">
+        <button @click="search">搜索</button>
+      </div> -->
     </div>
   </div>
 </template>
@@ -85,11 +89,18 @@ export default {
       const nowheight = window.innerHeight;
       screenHeight.value = nowheight;
     };
+
+
+    // const search = async()=>{
+    //   const data =await proxy.$http.get('/search?keywords=海阔天空')
+    //   console.log(data.data)
+    // }
     return {
       username,
       handleEnterBtnClick,
       screenHeight,
       ctx,proxy,
+ 
       
     };
   },

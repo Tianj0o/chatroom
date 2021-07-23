@@ -17,8 +17,8 @@
         <use xlink:href="#icon-SEND"></use>
       </svg>
     </div>
-    <div class="home" style="display: flex; flex-direction: column">
-      <div style="display: flex; align-items: center">
+    <div class="home" style="display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: center;justify-content:space-around">
         <div
           id="historyMsgs"
           class="historyMsgs"
@@ -29,7 +29,7 @@
             margin: 0.5rem 0;
             height: 2rem;
             align-items: center;
-            width: 50%;
+            
           "
         >
           <span style="">{{ tips }}</span>
@@ -41,7 +41,10 @@
             <use xlink:href="#icon-lishijilu"></use>
           </svg>
         </div>
-        <div style="width: 50%; display: flex; justify-content: center">
+        <div @click="handleQQ">
+          学习交流+
+        </div>
+        <div style=" display: flex; justify-content: center">
           <router-link to="/music" tag="div"><span>音乐</span> </router-link>
 
           <svg
@@ -157,6 +160,10 @@ export default {
       const nowtime = new Date()
         .toLocaleString("chinese", { hour12: false })
         .slice(5);
+        if(state.msg.trim()==''){
+          alert('你还没有输入内容噢')
+          return
+        }
       const data = {
         type: "msg",
         name: username,
@@ -255,7 +262,9 @@ export default {
         flag.value--;
       }
     };
-
+        const handleQQ = ()=>{
+          alert('请加QQ2576099053')
+        }
     return {
       state,
       handlerSentBtnClcik,
@@ -269,7 +278,8 @@ export default {
       tips,
       username,
       initmsg,
-      willGo
+      willGo,
+      handleQQ
     };
   },
 };
