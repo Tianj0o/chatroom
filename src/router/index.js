@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 
 import Home from '../views/Home.vue'
-import Music from '../views/Music'
+import Music from '../views/Music.vue'
 const routes = [
   {
     path: '/',
@@ -18,14 +18,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
-    path:'/music',
-    name:'Music',
-    component:Music
+    path: '/music',
+    name: 'Music',
+    component: Music
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
 

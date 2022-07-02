@@ -3,7 +3,7 @@
     class="main"
     :style="'height:' + screenHeight + 'px;' + 'width:' + screenWidth + 'px;'"
   >
-    <div style="display: flex; justify-content: space-around;font-size:1rem">
+    <div style="display: flex; justify-content: space-around; font-size: 1rem">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-new_file"></use>
       </svg>
@@ -17,8 +17,14 @@
         <use xlink:href="#icon-SEND"></use>
       </svg>
     </div>
-    <div class="home" style="display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: center;justify-content:space-around">
+    <div class="home" style="display: flex; flex-direction: column">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        "
+      >
         <div
           id="historyMsgs"
           class="historyMsgs"
@@ -29,7 +35,6 @@
             margin: 0.5rem 0;
             height: 2rem;
             align-items: center;
-            
           "
         >
           <span style="">{{ tips }}</span>
@@ -41,10 +46,8 @@
             <use xlink:href="#icon-lishijilu"></use>
           </svg>
         </div>
-        <div @click="handleQQ">
-          学习交流+
-        </div>
-        <div style=" display: flex; justify-content: center">
+        <div @click="handleQQ">学习交流+</div>
+        <div style="display: flex; justify-content: center">
           <router-link to="/music" tag="div"><span>音乐</span> </router-link>
 
           <svg
@@ -136,7 +139,7 @@ import { reactive, onMounted, ref, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import { useWebSocket } from "../hooks";
 import HisMsg from "../components/his-msg.vue";
-import MusicMsg from "../components/musicmsg";
+import MusicMsg from "../components/musicmsg.vue";
 export default {
   name: "Home",
   components: {
@@ -160,10 +163,10 @@ export default {
       const nowtime = new Date()
         .toLocaleString("chinese", { hour12: false })
         .slice(5);
-        if(state.msg.trim()==''){
-          alert('你还没有输入内容噢')
-          return
-        }
+      if (state.msg.trim() == "") {
+        alert("你还没有输入内容噢");
+        return;
+      }
       const data = {
         type: "msg",
         name: username,
@@ -179,15 +182,14 @@ export default {
       state.msg = "";
     };
 
-      const willGo = ()=>{
-        const r=confirm('将会跳转到源码页面')
-        if(r==true){
-          window.location='https://github.com/Tianj0o/websocket-vue'
-        }
-        else{
-          return 
-        }
+    const willGo = () => {
+      const r = confirm("将会跳转到源码页面");
+      if (r == true) {
+        window.location = "https://github.com/Tianj0o/websocket-vue";
+      } else {
+        return;
       }
+    };
     function handleMessage(e) {
       // console.log(state.msglist);
       // console.log(e.data);
@@ -262,9 +264,9 @@ export default {
         flag.value--;
       }
     };
-        const handleQQ = ()=>{
-          alert('请加QQ2576099053')
-        }
+    const handleQQ = () => {
+      alert("请加QQ2576099053");
+    };
     return {
       state,
       handlerSentBtnClcik,
@@ -279,12 +281,11 @@ export default {
       username,
       initmsg,
       willGo,
-      handleQQ
+      handleQQ,
     };
   },
 };
 </script>
-
 
 <style>
 ul {

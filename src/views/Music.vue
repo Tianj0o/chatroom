@@ -46,31 +46,39 @@
               background-color: white;
             "
           >
-            <svg class="icon" aria-hidden="true" style="font-size: 2rem;">
+            <svg class="icon" aria-hidden="true" style="font-size: 2rem">
               <use xlink:href="#icon-sousuo"></use>
             </svg>
           </button>
         </div>
       </div>
     </form>
-    <div style="height:90%">
-      <div style="display:flex;justify-content:space-between;width:90%;height:4rem;align-items:center;border-bottom:1px solid grey;margin:0 auto;">
-      <p  style="font-size:1.2rem;margin-left:2rem">{{state.navname}}</p> 
-      <router-link style="margin-right:2rem" tag="div" to="/"> <strong>back</strong> </router-link>
+    <div style="height: 90%">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          width: 90%;
+          height: 4rem;
+          align-items: center;
+          border-bottom: 1px solid grey;
+          margin: 0 auto;
+        "
+      >
+        <p style="font-size: 1.2rem; margin-left: 2rem">{{ state.navname }}</p>
+        <router-link style="margin-right: 2rem" tag="div" to="/">
+          <strong>back</strong>
+        </router-link>
       </div>
-   
-      <musiclist :musiclists="state.musiclist"></musiclist>
-    
-      
-      
-    </div>
 
+      <musiclist :musiclists="state.musiclist"></musiclist>
+    </div>
   </div>
 </template>
 
 <script>
 import { getCurrentInstance, ref, reactive, onMounted } from "vue";
-import musiclist from "../components/musiclist";
+import musiclist from "../components/musiclist.vue";
 export default {
   name: "Music",
   components: {
@@ -81,19 +89,18 @@ export default {
     //post将歌曲名发给后端
     const musicname = ref({});
 
-
     //给后端发送歌曲名
     const postMusicName = async () => {
       const data = await proxy.$http.post("/musicname", musicname.value);
       console.log(data.data);
       await fetchmusic();
-      state.navname='歌曲'
+      state.navname = "歌曲";
     };
 
     //获取音乐列表
     const state = reactive({
       musiclist: [],
-      navname:'每日推荐',
+      navname: "每日推荐",
     });
 
     //向后端请求数据
@@ -115,13 +122,13 @@ export default {
       screenWidth.value = nowwidth;
     };
     //获得推荐音乐
-    const fetchMusicrec =  async()=>{
-      const data = await proxy.$http.get('/musicrec')
-      state.musiclist = data.data
-    }
+    const fetchMusicrec = async () => {
+      const data = await proxy.$http.get("/musicrec");
+      state.musiclist = data.data;
+    };
     onMounted(() => {
       setHeight();
-      fetchMusicrec()
+      fetchMusicrec();
     });
     return {
       musicname,
