@@ -1,20 +1,20 @@
-function useWebSocket(handleMessage){
+function useWebSocket(handleMessage) {
 
     const ws = new WebSocket('ws://localhost:3040')
-    const init = ()=>{
-       bindEvent()
+    const init = () => {
+        bindEvent()
     }
-    function bindEvent(){
-        ws.addEventListener('open',(e)=>{
+    function bindEvent() {
+        ws.addEventListener('open', (e) => {
             // console.log('open',e)
         })
-        ws.addEventListener('error',(e)=>{
-            console.log('error',e)
+        ws.addEventListener('error', (e) => {
+            console.log('error', e)
         })
-        ws.addEventListener('close',(e)=>{
-            console.log('close',e)
+        ws.addEventListener('close', (e) => {
+            console.log('close', e)
         })
-        ws.addEventListener('message',handleMessage)
+        ws.addEventListener('message', handleMessage)
     }
 
     init()
