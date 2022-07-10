@@ -1,9 +1,7 @@
-interface fetchConfig {
-  url: string;
-  data?: BodyInit;
-}
-export default function request(config: fetchConfig) {
-  const { url, data } = config;
+const baseUrl = "http://localhost:8888";
 
-  return fetch(url).then((res) => res.json());
+export default function request(url: string, initConfig: RequestInit = {}) {
+  const requestUrl = baseUrl + url;
+  console.log(requestUrl, "+++++");
+  return fetch(requestUrl, initConfig).then((res) => res.json());
 }

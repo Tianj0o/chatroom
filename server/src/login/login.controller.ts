@@ -1,11 +1,20 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, HttpCode, Post } from '@nestjs/common';
 
 @Controller('login')
 export class LoginController {
   @Get()
-  login() {
+  loginGet() {
     return {
       data: 'hello,nest',
+    };
+  }
+  @Post()
+  @HttpCode(200)
+  login() {
+    return {
+      code: 200,
+      data: {},
+      message: '登录成功',
     };
   }
 }

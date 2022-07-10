@@ -6,6 +6,11 @@ import presetUno from "@unocss/preset-uno";
 import presetAttributify from "@unocss/preset-attributify";
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   plugins: [
     vue(),
     vueJsx(),
