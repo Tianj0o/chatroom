@@ -1,0 +1,9 @@
+#sendBtn {
+  position: absolute;
+  right: -80px;
+  transition: right 0.025s;
+}
+
+#sendBtn.active {
+  right: 20px;
+}

@@ -1,6 +1,7 @@
 import { defineComponent, reactive, StyleValue } from "vue";
 import User from "@/store/user";
 import request from "@/request/request";
+import { useRouter } from "vue-router";
 export default defineComponent({
   setup() {
     const styleValue: StyleValue = {
@@ -9,7 +10,7 @@ export default defineComponent({
     const user = reactive({
       name: "",
     });
-
+    const router = useRouter();
     async function handleLoginClick() {
       if (user.name.length < 3) {
         alert("名称必须大于3位");
@@ -20,7 +21,8 @@ export default defineComponent({
         method: "post",
         body: JSON.stringify(user.name),
       }).then((res) => {
-        console.log(res);
+        User.name = user.name;
+        router.push("/");
       });
     }
     return () => {
