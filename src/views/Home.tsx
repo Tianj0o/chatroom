@@ -55,15 +55,11 @@ export default defineComponent({
                     </div>
                   </div>
                 ) : (
-                  <div
-                    id="sendBtn"
-                    class={
-                      (isLoading.value ? "active " : "") +
-                      "text-white  text-center flex p-x-4 p-y-2 items-center p-x-4 bg-cyan "
-                    }
-                  >
+                  // <div class="sendBtnContainer">
+                  <div id="sendBtn" class={isLoading.value ? "active " : ""}>
                     发送
                   </div>
+                  // </div>
                 )}
               </div>
             </div>
